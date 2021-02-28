@@ -104,11 +104,7 @@ double NESTcalc::PhotonTime(INTERACTION_TYPE species, bool exciton,
   }
   if (fdetector->get_inGas() || energy < W_DEFAULT * 0.001) {
     SingTripRatio = 0.1;
-<<<<<<< HEAD
-    tauR = 0.;
-=======
     if ( fdetector->get_inGas() && !exciton ) tauR = 28e3; else tauR = 0.; //28 microseconds comes from Henrique: https://doi.org/10.1016/j.astropartphys.2018.04.006
->>>>>>> upstream/master
     if ( ValidityTests::nearlyEqual(ATOM_NUM, 18.)) { tau3 = 1600.; tau1 = 6.; } // from old G4S2Light
   } if ( tauR < 0. ) tauR = 0.; //in case varied with Gaussian earlier
 
@@ -290,11 +286,7 @@ QuantaResult NESTcalc::GetQuanta(const YieldResult& yields, double density,
   }
 
   //set omega (non-binomial recombination fluctuations parameter) according to whether the Lindhard <1, i.e. this is NR.
-<<<<<<< HEAD
-  double omega = yields.Lindhard <1 ? RecombOmegaNR(elecFrac, FreeParam) : RecombOmegaER(yields.ElectricField, elecFrac);
-=======
   double omega = yields.Lindhard <1 ? RecombOmegaNR(elecFrac, FreeParam) : RecombOmegaER(yields.ElectricField, elecFrac, FreeParam);
->>>>>>> upstream/master
   if ( ValidityTests::nearlyEqual(ATOM_NUM, 18.) ) omega = 0.0; // Ar has no non-binom sauce
   double Variance =
       recombProb * (1. - recombProb) * Ni + omega * omega * Ni * Ni;
@@ -431,28 +423,9 @@ YieldResult NESTcalc::GetYieldNROld ( double energy, int option ) { // possible 
 YieldResult NESTcalc::GetYieldNR(double energy, double density, double dfield, double massNum,
 				 const std::vector<double> &NuisParam/*{11.,1.1,0.0480,-0.0533,12.6,0.3,2.,0.3,2.,0.5,1.,1.}*/)
 {
-<<<<<<< HEAD
-
-  if ( ValidityTests::nearlyEqual(ATOM_NUM, 18.) ) { // liquid Ar
-    NuisParam[0] = 11.1025; // +/-1.10 Everything from https://docs.google.com/document/d/1vLg8vvY5bcdl4Ah4fzyE182DGWt0Wr7_FJ12_B10ujU
-    NuisParam[1] = 1.087399; // +/-0.025
-    NuisParam[2] = 0.1; // +/-0.005
-    NuisParam[3] = -0.0932; // +/-0.0095
-    NuisParam[4] = 2.998; // +/-1.026
-    NuisParam[5] = 0.3; // Fixed
-    NuisParam[6] = 2.94; // +/-0.12
-    NuisParam[7] = W_DEFAULT / 1000.;
-    NuisParam[8] = DBL_MAX;
-    NuisParam[9] = 0.5; // square root
-    NuisParam[10] = 1.0;
-    NuisParam[11] = 1.0;
-    massNum = fdetector->get_molarMass();
-  }
-=======
   
   if ( ValidityTests::nearlyEqual ( ATOM_NUM, 18. ) ) massNum = fdetector->get_molarMass();
-  
->>>>>>> upstream/master
+
   if ( NuisParam.size() < 12 )
   {
     throw std::runtime_error("ERROR: You need a minimum of 12 nuisance parameters for the mean yields.");

@@ -442,11 +442,7 @@ vector<double> signal1, signal2, signalE, vTable;
   
   double maxTimeSep = DBL_MAX;
   if (type_num == Kr83m) {
-<<<<<<< HEAD
-    if ( ValidityTests::nearlyEqual(eMin, 9.4) || ValidityTests::nearlyEqual(eMin, 32.1) || ValidityTests::nearlyEqual(eMin, 41.5) || ValidityTests::nearlyEqual(eMin, 41.55) ||ValidityTests::nearlyEqual(eMin, 41.6) && eMin != eMax ) {
-=======
     if ( (ValidityTests::nearlyEqual(eMin, 9.4) || ValidityTests::nearlyEqual(eMin, 32.1) || ValidityTests::nearlyEqual(eMin, 41.5) || ValidityTests::nearlyEqual(eMin, 41.55) || ValidityTests::nearlyEqual(eMin, 41.6)) && eMin != eMax ) {
->>>>>>> upstream/master
       maxTimeSep = eMax;
       if ( eMax <= 0. ) { cerr << "Max t sep must be +." << endl; return 1; }
     } else {
